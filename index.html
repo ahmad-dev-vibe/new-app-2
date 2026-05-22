@@ -3,186 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXORA | Premium News App</title>
+    <title>NEXORA | Professional News</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #FFC107;
-            --bg: #f4f7f6;
-            --white: #ffffff;
-            --text: #2d3436;
-        }
-
+        :root { --primary: #FFC107; --bg: #f8f9fa; --text: #1a1a1a; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
-        body { background-color: var(--bg); color: var(--text); }
+        body { background: var(--bg); color: var(--text); }
 
-        /* --- UI Components --- */
-        header { background: var(--white); box-shadow: 0 2px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
-        
+        /* Header */
+        header { background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.08); sticky; top: 0; z-index: 1000; padding: 15px 0; }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
         .logo { font-size: 28px; font-weight: 800; text-decoration: none; color: #000; }
-        .logo span { background: var(--primary); padding: 2px 10px; border-radius: 8px; margin-right: 5px; }
+        .logo span { background: var(--primary); padding: 2px 10px; border-radius: 8px; }
 
         .search-box { flex: 1; max-width: 500px; position: relative; }
-        .search-box input { width: 100%; padding: 12px 25px; border-radius: 50px; border: 2px solid #eee; outline: none; font-size: 14px; transition: 0.3s; }
-        .search-box input:focus { border-color: var(--primary); }
-        .search-box button { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); background: var(--primary); border: none; padding: 8px 20px; border-radius: 40px; font-weight: bold; cursor: pointer; }
+        .search-box input { width: 100%; padding: 12px 20px; border-radius: 50px; border: 2px solid #eee; outline: none; }
+        .search-box button { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); background: var(--primary); border: none; padding: 8px 15px; border-radius: 40px; font-weight: bold; cursor: pointer; }
 
-        .categories { background: #fff; border-top: 1px solid #f0f0f0; padding: 12px 0; overflow-x: auto; white-space: nowrap; }
-        .cat-wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; gap: 12px; }
-        .cat-btn { padding: 8px 20px; border-radius: 30px; border: none; background: #f0f0f0; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .cat-btn.active, .cat-btn:hover { background: var(--primary); transform: translateY(-2px); }
+        /* Categories */
+        .cat-bar { background: #fff; border-top: 1px solid #f0f0f0; padding: 10px 0; overflow-x: auto; white-space: nowrap; }
+        .cat-wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; gap: 10px; }
+        .cat-btn { padding: 8px 18px; border-radius: 20px; border: none; background: #f0f0f0; cursor: pointer; font-weight: 600; font-size: 14px; }
+        .cat-btn.active { background: var(--primary); }
 
-        main { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        /* News Grid */
+        main { max-width: 1200px; margin: 30px auto; padding: 0 20px; min-height: 50vh; }
         .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
 
-        /* --- Card Design --- */
-        .card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: 0.4s; display: flex; flex-direction: column; height: 100%; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        .card-img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
-        .card-content { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-        .card-tag { font-size: 11px; font-weight: 800; color: #ff9f43; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        .card-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; line-height: 1.4; color: #1e272e; }
-        .card-text { font-size: 14px; color: #57606f; line-height: 1.6; margin-bottom: 20px; }
-        .card-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; padding-top: 15px; border-top: 1px solid #f1f2f6; }
-        .read-btn { color: #000; text-decoration: none; background: var(--primary); padding: 5px 12px; border-radius: 5px; }
+        .card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+        .card img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
+        .card-body { padding: 20px; flex: 1; }
+        .card-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+        .card-meta { font-size: 12px; color: #888; margin-bottom: 10px; font-weight: 600; color: var(--primary); }
+        .btn-link { display: inline-block; margin-top: 15px; color: #000; font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--primary); }
 
-        /* --- Feedback States --- */
-        #loading { display: none; text-align: center; padding: 100px 0; grid-column: 1/-1; }
-        .loader-spin { width: 50px; height: 50px; border: 5px solid #eee; border-top: 5px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
+        /* Error/Loading States */
+        #status-msg { grid-column: 1/-1; text-align: center; padding: 50px; }
+        .loader { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        .error-msg { grid-column: 1/-1; background: #fff; padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .error-msg i { font-size: 50px; color: #ff4757; margin-bottom: 20px; }
-        
-        @media (max-width: 768px) {
-            .nav-container { justify-content: center; }
-            .search-box { min-width: 100%; margin-top: 10px; }
-        }
+        /* DEBUG PANEL - Asli wajha janne ke liye */
+        #debug-panel { margin-top: 20px; padding: 15px; background: #ffeeee; border: 1px solid #ffcccc; border-radius: 10px; display: none; color: #d32f2f; font-size: 13px; text-align: left; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="nav-container">
-            <a href="#" class="logo" onclick="location.reload()"><span>NEX</span>ORA</a>
+            <a href="#" class="logo"><span>NEX</span>ORA</a>
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search news, topics or locations...">
-                <button onclick="performSearch()">Search</button>
+                <input type="text" id="searchInput" placeholder="Enter city, keyword or country...">
+                <button onclick="handleSearch()">Search</button>
             </div>
         </div>
-        <div class="categories">
+        <div class="cat-bar">
             <div class="cat-wrap">
-                <button class="cat-btn active" onclick="loadCategory('general', this)">Trending</button>
-                <button class="cat-btn" onclick="loadCategory('world', this)">World</button>
-                <button class="cat-btn" onclick="loadCategory('business', this)">Business</button>
-                <button class="cat-btn" onclick="loadCategory('technology', this)">Tech</button>
-                <button class="cat-btn" onclick="loadCategory('sports', this)">Sports</button>
-                <button class="cat-btn" onclick="loadCategory('science', this)">Science</button>
+                <button class="cat-btn active" onclick="changeCat('general', this)">Top News</button>
+                <button class="cat-btn" onclick="changeCat('world', this)">World</button>
+                <button class="cat-btn" onclick="changeCat('nation', this)">India</button>
+                <button class="cat-btn" onclick="changeCat('technology', this)">Technology</button>
+                <button class="cat-btn" onclick="changeCat('business', this)">Business</button>
+                <button class="cat-btn" onclick="changeCat('sports', this)">Sports</button>
             </div>
         </div>
     </header>
 
     <main>
-        <div id="loading">
-            <div class="loader-spin"></div>
-            <p style="margin-top: 15px; font-weight: 600;">Connecting to Nexora Servers...</p>
+        <div id="status-msg">
+            <div class="loader"></div>
+            <p>Fetching latest news stories...</p>
         </div>
+
         <div class="news-grid" id="newsGrid"></div>
+
+        <!-- Debugging section -->
+        <div id="debug-panel">
+            <strong>System Report:</strong> <span id="debug-text"></span>
+        </div>
     </main>
 
     <script>
         const API_KEY = '61f89b2d30a914eeef029e24692d56bb';
 
-        // Base function to fetch data
-        async function fetchNexoraNews(endpoint) {
+        async function fetchNews(url) {
             const grid = document.getElementById('newsGrid');
-            const loader = document.getElementById('loading');
-            
+            const status = document.getElementById('status-msg');
+            const debug = document.getElementById('debug-panel');
+            const debugText = document.getElementById('debug-text');
+
             grid.innerHTML = '';
-            loader.style.display = 'block';
+            status.style.display = 'block';
+            debug.style.display = 'none';
 
             try {
-                const response = await fetch(endpoint);
-                const data = await response.json();
+                const res = await fetch(url);
+                const data = await res.json();
 
-                if (!response.ok) {
-                    // API specifically returned an error
-                    let errorMsg = data.errors ? data.errors[0] : "API Limit Exceeded or Key Inactive.";
-                    throw new Error(errorMsg);
+                if (!res.ok) {
+                    throw new Error(`API Error ${res.status}: ${data.errors ? data.errors[0] : 'Unauthorized Access'}`);
                 }
 
-                if (data.articles && data.articles.length > 0) {
-                    renderArticles(data.articles);
-                } else {
-                    throw new Error("No articles found for this search.");
+                if (data.articles.length === 0) {
+                    status.innerHTML = "<h3>No results found.</h3><p>Try different keywords.</p>";
+                    return;
                 }
+
+                status.style.display = 'none';
+                data.articles.forEach(article => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <img src="${article.image || 'https://via.placeholder.com/400x200'}" alt="img">
+                        <div class="card-body">
+                            <div class="card-meta">${article.source.name}</div>
+                            <h3 class="card-title">${article.title}</h3>
+                            <p style="font-size:14px; color:#666">${article.description ? article.description.slice(0, 100) : 'Read more details below...'}...</p>
+                            <a href="${article.url}" target="_blank" class="btn-link">READ FULL STORY</a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
 
             } catch (err) {
+                status.style.display = 'none';
+                debug.style.display = 'block';
+                debugText.innerText = err.message;
+                
                 grid.innerHTML = `
-                    <div class="error-msg">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <h2>Status Update</h2>
-                        <p style="margin: 15px 0; color: #666;">${err.message}</p>
-                        <p style="font-size: 13px; color: #999;">Tip: GNews keys take 30-60 mins to activate for first-time use. <br> If you just created the key, please wait a while.</p>
-                        <button onclick="location.reload()" style="margin-top:20px; padding: 10px 25px; cursor:pointer; background: #FFC107; border:none; border-radius:5px; font-weight:bold;">Retry Connection</button>
+                    <div style="grid-column:1/-1; text-align:center; padding:30px; background:#fff; border-radius:15px;">
+                        <i class="fas fa-exclamation-triangle" style="font-size:40px; color:#FFC107;"></i>
+                        <h2 style="margin-top:15px;">Unable to Connect</h2>
+                        <p style="color:#666; margin-top:10px;">Common causes: <br> 1. Ad-blocker blocking 'gnews.io' <br> 2. API Key still activating (needs 60 mins) <br> 3. Daily limit reached.</p>
+                        <button onclick="location.reload()" style="margin-top:15px; padding:10px 20px; background:var(--primary); border:none; font-weight:bold; cursor:pointer; border-radius:5px;">TRY REFRESHING</button>
                     </div>
                 `;
-            } finally {
-                loader.style.display = 'none';
             }
         }
 
-        function renderArticles(articles) {
-            const grid = document.getElementById('newsGrid');
-            articles.forEach(art => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                const date = new Date(art.publishedAt).toLocaleDateString('en-GB');
-                
-                card.innerHTML = `
-                    <img class="card-img" src="${art.image || 'https://via.placeholder.com/400x220?text=Nexora+News'}" alt="news" onerror="this.src='https://via.placeholder.com/400x220?text=Image+Not+Available'">
-                    <div class="card-content">
-                        <span class="card-tag">${art.source.name}</span>
-                        <h3 class="card-title">${art.title}</h3>
-                        <p class="card-text">${art.description ? art.description.substring(0, 100) + '...' : 'Full details available in the main story.'}</p>
-                        <div class="card-footer">
-                            <span><i class="far fa-calendar-alt"></i> ${date}</span>
-                            <a href="${art.url}" target="_blank" class="read-btn">Read More</a>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
+        function handleSearch() {
+            const q = document.getElementById('searchInput').value;
+            if(q) fetchNews(`https://gnews.io/api/v4/search?q=${q}&lang=en&apikey=${API_KEY}`);
         }
 
-        function loadCategory(cat, btn) {
+        function changeCat(cat, btn) {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            const url = `https://gnews.io/api/v4/top-headlines?category=${cat}&lang=en&apikey=${API_KEY}`;
-            fetchNexoraNews(url);
+            fetchNews(`https://gnews.io/api/v4/top-headlines?category=${cat}&lang=en&apikey=${API_KEY}`);
         }
 
-        function performSearch() {
-            const q = document.getElementById('searchInput').value;
-            if (q.trim() !== "") {
-                const url = `https://gnews.io/api/v4/search?q=${q}&lang=en&apikey=${API_KEY}`;
-                fetchNexoraNews(url);
-                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            }
-        }
+        document.getElementById('searchInput').addEventListener('keypress', (e) => { if(e.key === 'Enter') handleSearch(); });
 
-        // Search on Enter Key
-        document.getElementById('searchInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') performSearch();
-        });
-
-        // Initialize on Load
-        window.onload = () => {
-            const initialUrl = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&apikey=${API_KEY}`;
-            fetchNexoraNews(initialUrl);
-        };
+        // Initial Load
+        window.onload = () => fetchNews(`https://gnews.io/api/v4/top-headlines?category=general&lang=en&apikey=${API_KEY}`);
     </script>
 </body>
 </html>
